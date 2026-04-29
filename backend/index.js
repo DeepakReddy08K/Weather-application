@@ -2,7 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: join(__dirname, "..", ".env") });
+
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
