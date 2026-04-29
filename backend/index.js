@@ -9,6 +9,8 @@ import { errorMonitor } from "events";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, "..", ".env") });
 const app=express();
+app.set("view engine", "ejs");
+app.set("views", join(__dirname, "..", "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const port=3000;
@@ -17,18 +19,21 @@ async function getWeatherConditions(city) {
     const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
     const response=await fetch(url);
     const data=await response.json();
-    console.log(data);
+    return data;
 }
 app.get("/",(req,res)=>{
     console.log("new get request!");
     res.sendFile(join(__dirname, "..", "frontend", "index.html"));
 });
-app.post("/submit",(req,res)=>{
+app.post("/submit",async (req,res)=>{
     console.log("new post request");
     const city = req.body.location?.trim();
     console.log(city);
-    getWeatherConditions(city);
-    res.send("<h1>Thank you</h1>");
+    const data=await getWeatherConditions(city);
+    console.log(data);
+    res.render("index.ejs",{
+        data
+    })
 });
 app.listen(port,()=>{
     console.log("sever running on port "+port);
