@@ -8,7 +8,6 @@ import dotenv from "dotenv";
 import { errorMonitor } from "events";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, "..", ".env") });
-
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
