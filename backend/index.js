@@ -32,9 +32,13 @@ app.post("/submit",async (req,res)=>{
     console.log(city);
     const data=await getWeatherConditions(city);
     console.log(data);
-    res.render("index.ejs",{
-        data
-    })
+    if(data.cod!==200){
+        return res.send("<h1>City not found OR Try again</h1>")
+    }
+        res.render("index", {
+            data,
+            error: null
+        });
 });
 app.listen(port,()=>{
     console.log("sever running on port "+port);
