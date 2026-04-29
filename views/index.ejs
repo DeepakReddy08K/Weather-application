@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather details</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1 class="ejs-main-heading">Weather at <%= data.name%></h1>
+    <h2 class="ejs-side-heading">Temperatuer details</h2>
+    <ul class="ejs-ul">
+        <li>Current Temperature <%= data.main.temp %> (°C)</li>
+        <li>Maximum Temperature <%= data.main.temp_max %> (°C)</li>
+        <li>Minimum Temperature <%= data.main.temp_min %> (°C)</li>
+    </ul>
+    <h2 class="ejs-side-heading">Wind details</h2>
+    <ul class="ejs-ul">
+        <li>Speed <%= data.wind.speed %> (meters/sec)</li>
+        <li>Direction <%= data.wind.deg %> (degrees)</li>
+    </ul>
+    <h2 class="ejs-side-heading">Humidity details</h2>
+    <ul class="ejs-ul">
+        <li>Humidity <%= data.main.humidity %> (%)</li>
+    </ul>
 </body>
 </html>
